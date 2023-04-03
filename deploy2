@@ -1,0 +1,12 @@
+from kubernetes import client, config
+
+config.load_kube_config()
+
+api_instance = client.AppsV1Api()
+
+namespace = "your-namespace"
+
+deployments = api_instance.list_namespaced_deployment(namespace)
+
+for deployment in deployments.items:
+    print(deployment.metadata.name)
