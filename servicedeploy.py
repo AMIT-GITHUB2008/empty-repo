@@ -1,21 +1,33 @@
 from kubernetes import client, config
+from prettytable import PrettyTable
 
+# Load Kubernetes configuration
 config.load_kube_config()
 
-api_instance = client.CoreV1Api()
-apps_api_instance = client.AppsV1Api()
+# Create Kubernetes API client
+api = client.CoreV1Api()
 
-deployment_name = "your-deployment-name"
-namespace = "your-namespace"
+# Specify the namespace and deployment name
+namespace = "default"
+deployment_name = "my-deployment"
 
 # Get the deployment object
-deployment = apps_api_instance.read_namespaced_deployment(deployment_name, namespace)
+deployment = api.read_namespaced_deployment(deployment_name, namespace)
 
-# Get the label selector for the deployment
-label_selector = ",".join([f"{key}={value}" for key, value in deployment.spec.selector.match_labels.items()])
+# Get the labels of the deployment
+deployment_labels = deployment.spec.selector.match_labels
 
-# Get the service object with the matching label selector
-services = api_instance.list_namespaced_service(namespace, label_selector=label_selector)
+# Find all pods with matching labels
+pod_list = api.list_namespaced_pod(namespace, label_selector=','.join([f'{k}={v}' for k, v in deployment_labels.items()]))
 
-for service in services.items:
-    print(service.metadata.name)
+# Create table for output
+table = PrettyTable()
+table.field_names = ["Pod Name", "IP Address", "Labels"]
+
+# Add rows to the table
+for pod in pod_list.items:
+    labels = ','.join([f"{k}={v}" for k, v in pod.metadata.labels.items()])
+    table.add_row([pod.metadata.name, pod.status.pod_ip, labels])
+
+# Print the table
+print(table)
