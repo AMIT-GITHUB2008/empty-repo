@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-a-to-external
+  namespace: <your-namespace>
+spec:
+  podSelector:
+    matchLabels:
+      app: service-a
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+    ports:
+    - port: 80
+      protocol: TCP
+  policyTypes:
+  - Egress
