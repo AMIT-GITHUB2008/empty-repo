@@ -1,0 +1,33 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route("/mutate", methods=["POST"])
+def mutate():
+    admission_review = request.json
+    admission_request = admission_review["request"]
+
+    # Retrieve the original resource from the admission request
+    resource = admission_request["object"]
+
+    # Add the label to the resource
+    labels = resource.setdefault("metadata", {}).setdefault("labels", {})
+    labels["animal"] = "dog"
+
+    # Create the admission response with the modified resource
+    admission_response = {
+        "uid": admission_request["uid"],
+        "allowed": True,
+        "patch": None,
+        "patchType": None,
+        "auditAnnotations": {}
+    }
+
+    # Set the modified resource in the admission response
+    admission_response["response"] = {"allowed": True, "patchType": "JSONPatch"}
+
+    # Return the admission response as JSON
+    return jsonify(admission_response)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000)
