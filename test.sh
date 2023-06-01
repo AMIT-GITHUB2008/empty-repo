@@ -167,7 +167,11 @@ Press CTRL+C to quit
 192.168.0.0 - - [01/Jun/2023 05:33:59] "\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03ÖKCX'ªSÃ·£×Ú\x0f>é¹\x1d\x02\x9cNô\x01s:ïÏ\x94\x16\x84p\x09r \x1b\x7f\x06Ã\x06¯ãY6JÙyurÊ£³a\x84\x97\x0b\x1ax¿2\x80«oòuå\x1e\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ" HTTPStatus.BAD_REQUEST -
 192.168.0.0 - - [01/Jun/2023 05:33:59] code 400, message Bad request version ("\x14\x86'T\x9dè¸~Ë\x96Ôm#\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ")
 192.168.0.0 - - [01/Jun/2023 05:33:59] "\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03'Åýò\x94\x17íòò\x85ÚØ7#´èäõ\x14î\x89òú\x83iÝ?R\x1aß\x0dÊ Ñ\x01&Ã\x02v\x1d¿\x1e\x19õ\x19%\x8dMuïU\x0b\x14\x86'T\x9dè¸~Ë\x96Ôm#\x00>\x13\x02\x13\x03\x13\x01À,À0\x00\x9fÌ©Ì¨ÌªÀ+À/\x00\x9eÀ$À(\x00kÀ#À'\x00gÀ" HTTPStatus.BAD_REQUEST -
-''
+
+####
+openssl req -newkey rsa:2048 -nodes -keyout webhook.key -x509 -days 365 -out webhook.crt
+Internal error occurred: failed calling webhook "webhook-app.example.com": failed to call webhook: Post "https://192.168.1.3:8000/mutate?timeout=10s": tls: first record does not look like a TLS handshak
+'
 
                                 
                                     
