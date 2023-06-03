@@ -1,3 +1,6 @@
+Error from server (InternalError): error when creating "test-pod.yaml": Internal error occurred: failed calling webhook "pod-label-add.trstringer.com": failed to call webhook: Post "https://192.168.1.5:443/mutate?timeout=10s": tls: failed to verify certificate: x509: cannot validate certificate for 192.168.1.5 because it doesn't contain any IP SANs
+
+
 
 !/bin/bash
 ##https://killercoda.com/playgrounds/scenario/kubernetes
