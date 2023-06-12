@@ -1,5 +1,7 @@
 Error from server (InternalError): Internal error occurred: failed calling webhook "webhook-app.example.com": failed to call webhook: Post "https://192.168.1.3:443/mutate?timeout=10s": tls: failed to verify certificate: x509: certificate relies on legacy Common Name field, use SANs instead
 
+
+Error creating: Internal error occurred: failed calling webhook "pod-annotate-webhook.slok.dev": failed to call webhook: Post "https://pod-annotate-webhook.default.svc:443/mutate?timeout=10s": tls: failed to verify certificate: x509: certificate is valid for webhook-app.example.com, not pod-annotate-webhook.default.svc
 https://github.com/trstringer/kubernetes-mutating-webhook/blob/main/kubernetes/mutating-webhook-config.yaml
 
 Error from server (InternalError): error when creating "test-pod.yaml": Internal error occurred: failed calling webhook "pod-label-add.trstringer.com": failed to call webhook: Post "https://192.168.1.5:443/mutate?timeout=10s": tls: failed to verify certificate: x509: cannot validate certificate for 192.168.1.5 because it doesn't contain any IP SANs
