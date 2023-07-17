@@ -1,0 +1,27 @@
+The provided YAML file describes the PodSecurityPolicy (PSP) configuration for Gremlin. The PSP defines the permissions and security settings required for the Gremlin containers to operate effectively. Here are the specific permissions and their purposes:
+
+1. `privileged`: This permission is set to `{{ .Values.gremlin.podSecurity.privileged }}`. When set to `true`, it allows the Gremlin containers to run with privileged access. Privileged containers have more capabilities and permissions on the host system, which are necessary for certain types of attacks or experiments.
+
+2. `allowPrivilegeEscalation`: This permission is set to `{{ .Values.gremlin.podSecurity.allowPrivilegeEscalation }}`. It determines whether privilege escalation is allowed for the Gremlin containers. Privilege escalation refers to the ability of a process to gain higher privileges or access more resources than initially assigned. Setting this to `false` restricts the Gremlin containers from escalating privileges.
+
+3. `readOnlyRootFilesystem`: This permission is set to `{{ .Values.gremlin.podSecurity.readOnlyRootFilesystem }}`. It controls whether the Gremlin containers are allowed to write to the root filesystem. When set to `true`, the containers have read-only access to the root filesystem, providing an extra layer of security by preventing modifications to critical system files.
+
+4. `hostNetwork`: This permission is set to `{{ .Values.gremlin.hostNetwork }}`. It determines whether the Gremlin containers are allowed to use the host's network namespace. When set to `true`, the containers have access to the host's network stack and can interact with the network interfaces and services running on the host.
+
+5. `hostPID`: This permission is set to `{{ .Values.gremlin.hostPID }}`. It controls whether the Gremlin containers are allowed to use the host's PID (Process ID) namespace. When set to `true`, the containers can access and interact with processes running on the host system.
+
+6. `allowedCapabilities`: This permission lists the Linux capabilities granted to the Gremlin containers. Capabilities define specific actions or privileges that a process can perform. The capabilities specified in the `allowedCapabilities` section enable the Gremlin containers to execute various types of attacks or experiments.
+
+7. `volumes`: This section specifies the allowed volume types for the Gremlin containers. It ensures that the containers can mount specific volume types such as ConfigMaps, Secrets, and HostPaths.
+
+8. `runAsUser`: This section defines the Linux user that the Gremlin containers should run as. By setting appropriate user-level permissions, it helps ensure proper isolation and security of the Gremlin containers.
+
+9. `seLinux`: This section sets the SELinux options for the Gremlin containers. SELinux provides additional security measures by enforcing access controls and policies on Linux systems.
+
+10. `supplementalGroups`: This section specifies the Linux groups that the Gremlin containers should run as. It helps manage group-level permissions and access controls for the containers.
+
+11. `fsGroup`: This section defines the Linux groups applied to the mounted volumes. It ensures proper access and permissions for the volumes used by the Gremlin containers.
+
+12. `allowedHostPaths`: This section specifies the host paths that the Gremlin containers are allowed to access. The paths listed here are necessary for specific operations, such as storing attack logs, accessing cgroup information, and interacting with certain system resources.
+
+It's important to note that the specific permissions required by Gremlin may vary based on the attack types and experiments being performed. The provided PSP configuration ensures that the Gremlin containers have the necessary permissions to carry out their intended tasks while maintaining the required security boundaries.
